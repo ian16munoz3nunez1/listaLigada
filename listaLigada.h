@@ -19,11 +19,17 @@ class ListaLigada
 
     Nodo *head;
     size_t cont;
+
 public:
     ListaLigada();
 
     void pushFront(const I &dato);
     void popFront();
+
+    void pushBack(const I &dato);
+    void popBack();
+
+    void print();
     size_t size();
 };
 
@@ -55,6 +61,55 @@ void ListaLigada<I>::popFront()
     head = head->ptr;
     delete temp;
     cont--;
+}
+
+template<class I>
+void ListaLigada<I>::pushBack(const I &dato)
+{
+    if(cont == 0)
+        pushFront(dato);
+    else
+    {
+        Nodo *nodo = new Nodo(dato);
+        Nodo *temp = head;
+
+        while(temp->ptr != nullptr)
+            temp = temp->ptr;
+        temp->ptr = nodo;
+        cont++;
+    }
+}
+
+template<class I>
+void ListaLigada<I>::popBack()
+{
+    if(cont == 0)
+    {
+        cout << "Lista vacia" << "No se puede eliminar al final" << endl;
+        return;
+    }
+    else if(cont == 1)
+        popFront();
+    else
+    {
+        Nodo *temp = head;
+        while(temp->ptr->ptr != nullptr)
+            temp = temp->ptr;
+        delete temp->ptr;
+        temp->ptr = nullptr;
+        cont--;
+    }
+}
+
+template<class I>
+void ListaLigada<I>::print()
+{
+    Nodo *temp = head;
+    while(temp != nullptr)
+    {
+        cout << temp->dato << endl;
+        temp = temp->ptr;
+    }
 }
 
 template<class I>
