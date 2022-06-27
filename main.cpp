@@ -1,34 +1,19 @@
 #include<iostream>
+#include"listaLigada.h"
 
 using namespace std;
 
-template<typename I>
-struct Nodo
-{
-    I dato;
-    Nodo *ptr;
-
-    Nodo(const I &dato, Nodo *ptr = nullptr)
-    :dato(dato), ptr(ptr) {}
-};
-
 int main()
 {
-    Nodo<int> *a = new Nodo<int>(1);
-    Nodo<int> *b = new Nodo<int>(2, a);
-    Nodo<int> *c = new Nodo<int> (3, b);
+    ListaLigada<int> lista;
+    lista.pushFront(1);
+    lista.pushFront(2);
+    lista.pushFront(3);
+    lista.pushFront(4);
 
-    cout << a << endl;
-    cout << a->dato << endl;
-    cout << a->ptr << endl << endl;
-
-    cout << b << endl;
-    cout << b->dato << endl;
-    cout << b->ptr << endl << endl;
-
-    cout << c << endl;
-    cout << c->dato << endl;
-    cout << c->ptr << endl << endl;
+    cout << lista.size() << endl;
+    lista.popFront();
+    cout << lista.size() << endl;
 
     return 0;
 }
